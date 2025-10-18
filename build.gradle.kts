@@ -37,6 +37,7 @@ dependencies {
   testImplementation("org.springframework.security:spring-security-test")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
   testImplementation("com.h2database:h2")
+  testImplementation("io.mockk:mockk:1.14.6")
 }
 
 kotlin {
