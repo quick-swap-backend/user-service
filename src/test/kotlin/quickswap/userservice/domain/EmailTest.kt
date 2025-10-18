@@ -1,0 +1,29 @@
+package quickswap.userservice.domain
+
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import kotlin.test.assertEquals
+
+class EmailTest {
+
+  @Test
+  fun validate() {
+    assertThrows<IllegalArgumentException> {
+      Email("a")
+      Email("a@")
+      Email("a@b")
+      Email("a@b")
+      Email("a@b.c")
+    }
+
+    Email("a@b.co")
+  }
+
+  @Test
+  fun equals() {
+    assertEquals(
+      Email("a@b.co"),
+      Email("a@b.co")
+    )
+  }
+}
