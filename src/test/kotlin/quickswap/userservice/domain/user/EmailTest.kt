@@ -1,8 +1,9 @@
-package quickswap.userservice.domain
+package quickswap.userservice.domain.user
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class EmailTest {
 
@@ -23,6 +24,11 @@ class EmailTest {
   fun equals() {
     assertEquals(
       Email("a@b.co"),
+      Email("a@b.co")
+    )
+
+    assertNotEquals(
+      Email("a@b.com"),
       Email("a@b.co")
     )
   }
