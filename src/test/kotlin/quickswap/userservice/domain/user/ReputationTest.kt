@@ -8,10 +8,10 @@ import kotlin.test.assertNotEquals
 class ReputationTest {
   @Test
   fun validate() {
-    assertThrows<IllegalArgumentException> {
-      Reputation(0.99f)
-      Reputation(5.01f)
-    }
+    assertThrows<IllegalArgumentException> { Reputation(0.99f) }
+
+    assertThrows<IllegalArgumentException> { Reputation(5.01f) }
+
     Reputation(1f)
     Reputation(5f)
   }

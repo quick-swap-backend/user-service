@@ -9,12 +9,11 @@ class PasswordTest {
 
   @Test
   fun validate() {
-    assertThrows<IllegalArgumentException> {
-      Password("a")
-      Password("abcd")
-      Password("abcde ")
-      Password("abcd e")
-    }
+    assertThrows<IllegalArgumentException> { Password("abcd") }
+
+    assertThrows<IllegalArgumentException> { Password("abcde ") }
+
+    assertThrows<IllegalArgumentException> { Password("abcd e") }
 
     Password("abcdef")
   }
