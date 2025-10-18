@@ -30,11 +30,13 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   developmentOnly("org.springframework.boot:spring-boot-docker-compose")
   runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+  implementation("com.github.f4b6a3:ulid-creator:5.2.3")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
   testImplementation("org.springframework.security:spring-security-test")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+  testImplementation("com.h2database:h2")
 }
 
 kotlin {
