@@ -3,9 +3,17 @@ package quickswap.userservice.domain.user
 import jakarta.persistence.Embedded
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 import quickswap.userservice.domain.shared.PasswordEncoder
 
 @Entity
+@Table(
+  name = "users",
+  uniqueConstraints = [
+    UniqueConstraint(name = "uk_user_email", columnNames = ["email"])
+  ]
+)
 class User private constructor(
 
   @EmbeddedId

@@ -3,13 +3,15 @@ package quickswap.userservice.domain.user
 import org.junit.jupiter.api.Test
 import quickswap.userservice.domain.shared.IdProvider
 import quickswap.userservice.domain.shared.PasswordEncoder
-import java.util.*
+import quickswap.userservice.fixture.UserFixture
+import quickswap.userservice.fixture.UserFixture.Companion.createUser
+import quickswap.userservice.fixture.UserFixture.Companion.getUserCreateRequest
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class UserTest {
 
-  val idProvider: IdProvider = IdProvider { UUID.randomUUID().toString() }
+  val idProvider: IdProvider = UserFixture.idProvider
   val passwordEncoder: PasswordEncoder = object : PasswordEncoder {
 
     override fun encode(password: String): String {
@@ -56,15 +58,7 @@ class UserTest {
       Reputation(3.3f)
     )
 
-    val userB = User.of(
-      userId,
-      UserCreateRequest(
-        Email("efg@test.com"), Password("test@456"),
-        Address("서울특별시", "강서구", "456-123"), Telephone("010-5678-1234")
-      ),
-      passwordEncoder,
-      Reputation(1.3f)
-    )
+    val userB = createUser(userId = userId)
 
     assertEquals(userA, userB)
   }
@@ -75,18 +69,14 @@ class UserTest {
 
     val user = User.of(
       userId,
-      UserCreateRequest(
-        Email("abc@test.com"), Password("test@123"),
-        Address("부산특별시", "광안리", "123-456"), Telephone("010-1234-5678"),
-      ),
+      getUserCreateRequest(password = Password("test@123")),
       passwordEncoder,
       Reputation(3.3f)
     )
 
-    assertTrue {
-      user.verifyPassword(Password("test@123"), passwordEncoder)
-      !user.verifyPassword(Password("test@1234"), passwordEncoder)
-    }
+    assertTrue { user.verifyPassword(Password("test@123"), passwordEncoder) }
+
+    assertTrue { !user.verifyPassword(Password("test@1234"), passwordEncoder) }
   }
 
   @Test
@@ -95,15 +85,7 @@ class UserTest {
     val oldPassword = "test@123"
     val newPassword = "abcd@123"
 
-    val user = User.of(
-      userId,
-      UserCreateRequest(
-        Email("abc@test.com"), Password(oldPassword),
-        Address("부산특별시", "광안리", "123-456"), Telephone("010-1234-5678")
-      ),
-      passwordEncoder,
-      Reputation(3.3f)
-    )
+    val user = createUser(userId = userId, request = getUserCreateRequest(password = Password(oldPassword)))
 
     user.changePassword(Password(oldPassword), passwordEncoder)
 

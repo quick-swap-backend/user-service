@@ -12,23 +12,4 @@ class UserCreateResponse private constructor(
       return UserCreateResponse(user.id.value, user.email.value)
     }
   }
-
-  override fun equals(other: Any?): Boolean {
-    if (this === other) return true
-    if (javaClass != other?.javaClass) return false
-
-    other as UserCreateResponse
-
-    if (userId != other.userId) return false
-    if (email != other.email) return false
-
-    return true
-  }
-
-  override fun hashCode(): Int {
-    var result = userId.hashCode()
-    result = 31 * result + email.hashCode()
-    return result
-  }
-
 }

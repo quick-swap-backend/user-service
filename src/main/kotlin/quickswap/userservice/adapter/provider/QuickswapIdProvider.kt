@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 import quickswap.userservice.domain.shared.IdProvider
 
 @Component
-class QuickswapIdProvider(): IdProvider {
+class QuickswapIdProvider: IdProvider {
 
   override fun provide(): String {
     return UlidCreator.getUlid().toString()
