@@ -3,6 +3,7 @@ import requests
 import json
 import re
 from github import Github
+from github import Auth
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -18,11 +19,18 @@ def get_changed_files(pr):
   return changed_files
 
 def get_file_content(repo, file_path, ref):
-  return repo.get_contents(file_path, ref=ref).decoded_content.decode('utf-8')
+  try:
+    return repo.get_contents(file_path, ref=ref).decoded_content.decode('utf-8')
+  except Exception as e:
+    print(f"파일을 가져올 수 없음: {file_path} (에러: {e})")
+    return None
 
 def search_file(repo, file, changed_files, ref):
   if file.type == 'file' and file.name.endswith(('.kt', '.kts', '.java')):
     content = get_file_content(repo, file.path, ref)
+    if not content:  # 파일을 가져올 수 없으면 건너뛰기
+      return None, set()
+
     related = set()
     for changed_file in changed_files:
       changed_name = os.path.splitext(os.path.basename(changed_file['filename']))[0]
@@ -95,7 +103,9 @@ def call_claude_api(changes, related_files):
 
   system_content += "\n변경 내용:\n"
   for file_info in changes:
-    system_content += f"파일: {file_info['filename']}\n전체 내용:\n{file_info['full_content']}\n\n변경된 부분:\n{file_info['patch']}\n\n"
+    if file_info['full_content']:  # 전체 내용이 있는 경우만
+      system_content += f"파일: {file_info['filename']}\n전체 내용:\n{file_info['full_content']}\n\n"
+    system_content += f"변경된 부분:\n{file_info['patch']}\n\n"
 
   system_content += "\n관련된 파일들:\n"
   for changed_file, related in related_files.items():
@@ -124,10 +134,13 @@ def call_claude_api(changes, related_files):
   if response.status_code == 200:
     return response.json()['content'][0]['text']
   else:
-    return f"Error: API returned status code {response.status_code}"
+    return f"Error: API returned status code {response.status_code}\n{response.text}"
 
 def main():
-  g = Github(os.environ['GITHUB_TOKEN'])
+  # Deprecation Warning 해결
+  auth = Auth.Token(os.environ['GITHUB_TOKEN'])
+  g = Github(auth=auth)
+
   repo = g.get_repo(os.environ['GITHUB_REPOSITORY'])
   pr_number = int(os.environ['PR_NUMBER'])
   pr = repo.get_pull(pr_number)
@@ -136,9 +149,19 @@ def main():
   changes = []
 
   for file_info in changed_files:
-    full_content = get_file_content(repo, file_info['filename'], pr.head.sha)
-    file_info['full_content'] = full_content
+    # 삭제된 파일이 아닌 경우에만 전체 내용 가져오기
+    if file_info['status'] != 'removed':
+      full_content = get_file_content(repo, file_info['filename'], pr.head.sha)
+      file_info['full_content'] = full_content
+    else:
+      file_info['full_content'] = None  # 삭제된 파일은 내용 없음
+
     changes.append(file_info)
+
+  # 변경사항이 있는 경우에만 리뷰 진행
+  if not changes:
+    print("리뷰할 변경사항이 없습니다.")
+    return
 
   related_files = find_related_files(repo, changed_files, pr.head.sha)
   review = call_claude_api(changes, related_files)
