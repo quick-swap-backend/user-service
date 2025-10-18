@@ -26,7 +26,7 @@ dependencies {
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-  implementation("org.springframework.boot:spring-boot-starter-security")
+  implementation("org.springframework.security:spring-security-core")
   implementation("org.springframework.boot:spring-boot-starter-web")
   developmentOnly("org.springframework.boot:spring-boot-docker-compose")
   runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
