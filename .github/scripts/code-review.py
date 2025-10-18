@@ -105,7 +105,7 @@ def call_claude_api(changes, related_files):
 
   payload = {
     "model": "claude-sonnet-4-20250514",
-    "max_tokens": 1024,
+    "max_tokens": 4096,
     "system": system_content,
     "messages": [
       {
