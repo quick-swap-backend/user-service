@@ -1,7 +1,14 @@
-package quickswap.userservice.domain
+package quickswap.userservice.domain.user
+
+import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
 
 /* 평판 평균 점수. 1~5. 거래 기록이 없으면 null 일 수 있음 */
-data class Reputation(val value: Float?) {
+@Embeddable
+data class Reputation(
+  @Column(name = "reputation")
+  val value: Float?
+) {
   init {
     value?.let {
       require(it in 1.0f..5.0f) {

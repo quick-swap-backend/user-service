@@ -1,6 +1,15 @@
-package quickswap.userservice.domain
+package quickswap.userservice.domain.user
 
-data class Email(val value: String) {
+import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
+
+@Embeddable
+data class Email(
+
+  @Column(name = "email", nullable = false)
+  val value: String
+
+) {
 
   companion object {
     private val EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$".toRegex()

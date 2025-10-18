@@ -1,8 +1,9 @@
-package quickswap.userservice.domain
+package quickswap.userservice.domain.user
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class AddressTest {
 
@@ -26,6 +27,11 @@ class AddressTest {
     assertEquals(
       Address("서울특별시", "사당로 20길", "12345"),
       Address("서울특별시", "사당로 20길", "12345")
+    )
+
+    assertNotEquals(
+      Address("서울특별시", "사당로 20길", "12345"),
+      Address("서울특별시", "강남구", "12345")
     )
   }
 
