@@ -3,6 +3,8 @@ name: Code Review
 on:
   pull_request:
     types: [opened, synchronize]
+    branches:
+      - dev  # dev 브랜치로의 PR만 트리거
 
 permissions:
   contents: read
