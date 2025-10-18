@@ -1,8 +1,9 @@
-package quickswap.userservice.domain
+package quickswap.userservice.domain.user
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class TelephoneTest {
   @Test
@@ -24,6 +25,11 @@ class TelephoneTest {
     assertEquals(
       Telephone("010-1234-5678"),
       Telephone("010-1234-5678")
+    )
+
+    assertNotEquals(
+      Telephone("010-1234-5678"),
+      Telephone("010-1234-5671")
     )
   }
 }

@@ -1,8 +1,9 @@
-package quickswap.userservice.domain
+package quickswap.userservice.domain.user
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class ReputationTest {
   @Test
@@ -20,6 +21,11 @@ class ReputationTest {
     assertEquals(
       Reputation(3.51f),
       Reputation(3.51f)
+    )
+
+    assertNotEquals(
+      Reputation(3.51f),
+      Reputation(3.52f)
     )
   }
 }
