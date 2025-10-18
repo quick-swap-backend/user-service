@@ -20,5 +20,4 @@ class UserController(
     val result = userCreator.create(request)
     return ResponseEntity.ok(UserCreateResponse.of(result))
   }
-
 }

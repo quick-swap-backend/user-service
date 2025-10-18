@@ -6,5 +6,8 @@ import quickswap.userservice.domain.user.User
 import quickswap.userservice.domain.user.UserId
 
 interface UserRepository : JpaRepository<User, UserId> {
+
   fun existsByEmail(email: Email): Boolean
+
+  fun findByEmail(email: Email): User?
 }
