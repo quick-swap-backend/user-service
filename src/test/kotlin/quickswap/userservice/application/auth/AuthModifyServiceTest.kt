@@ -7,6 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import quickswap.userservice.adapter.persistence.auth.RefreshTokenEntity
 import quickswap.userservice.application.auth.ports.out.RefreshTokenRepository
 import quickswap.userservice.application.auth.ports.out.TokenProvider
+import quickswap.userservice.application.auth.ports.out.TokenResolver
 import quickswap.userservice.application.user.ports.`in`.UserFinder
 import quickswap.userservice.domain.shared.PasswordEncoder
 import quickswap.userservice.domain.user.Email
@@ -19,9 +20,10 @@ class AuthModifyServiceTest {
   val userFinder: UserFinder = mockk()
   val passwordEncoder: PasswordEncoder = mockk()
   val tokenProvider: TokenProvider = mockk()
+  val tokenResolver: TokenResolver = mockk()
   val refreshTokenRepository: RefreshTokenRepository = mockk()
   val modifyService: AuthModifyService =
-    AuthModifyService(userFinder, passwordEncoder, tokenProvider, refreshTokenRepository)
+    AuthModifyService(userFinder, passwordEncoder, tokenProvider, tokenResolver, refreshTokenRepository)
 
   @Test
   fun createToken() {
@@ -41,7 +43,7 @@ class AuthModifyServiceTest {
     every { refreshTokenRepository.forceExpireAllByUserId(user.id.value) } returns Unit
     every { tokenProvider.generateAccessToken(user.id, user.email) } returns accessToken
     every { tokenProvider.generateRefreshToken(user.id) } returns refreshToken
-    every { tokenProvider.getExpirationDateTime(any()) } returns LocalDateTime.MAX
+    every { tokenResolver.getExpirationDateTime(any()) } returns LocalDateTime.MAX
     every { refreshTokenRepository.save(any()) } returns mockk()
 
     val (createdAccessToken, createdRefreshToken) = modifyService.createToken(email, password)
@@ -64,7 +66,7 @@ class AuthModifyServiceTest {
 
     every { refreshTokenRepository.findByToken(refreshToken) } returns refreshTokenEntity
     every { refreshTokenEntity.isExpired() } returns false
-    every { tokenProvider.getUserIdFromToken(refreshToken) } returns user.id
+    every { tokenResolver.getUserIdFromToken(refreshToken) } returns user.id
     every { userFinder.findById(user.id) } returns user
     every { tokenProvider.generateAccessToken(user.id, user.email) } returns accessToken
 
