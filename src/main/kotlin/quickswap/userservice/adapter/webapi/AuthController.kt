@@ -11,13 +11,13 @@ import quickswap.userservice.application.auth.ports.`in`.TokenCreator
 @RequestMapping("/api/v1")
 @RestController
 class AuthController(
-  val tokenCreator: TokenCreator
+  private val tokenCreator: TokenCreator
 ) {
 
   @PostMapping("/login")
   fun login(@RequestBody request: LoginRequest): ResponseEntity<LoginResponse> {
     val (accessToken, refreshToken) = tokenCreator.createToken(request.email, request.password)
-    return ResponseEntity.ok(LoginResponse(accessToken, refreshToken));
+    return ResponseEntity.ok(LoginResponse(accessToken, refreshToken))
   }
 
   @PostMapping("/refresh")

@@ -10,7 +10,7 @@ import quickswap.userservice.domain.user.UserId
 @Service
 class UserQueryService(
 
-  val userRepository: UserRepository
+  private val userRepository: UserRepository
 
 ): UserFinder {
 

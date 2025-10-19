@@ -15,10 +15,10 @@ import quickswap.userservice.domain.user.User
 @Transactional
 @Service
 class AuthModifyService(
-  val userFinder: UserFinder,
-  val passwordEncoder: PasswordEncoder,
-  val tokenProvider: TokenProvider,
-  val refreshTokenRepository: RefreshTokenRepository
+  private val userFinder: UserFinder,
+  private val passwordEncoder: PasswordEncoder,
+  private val tokenProvider: TokenProvider,
+  private val refreshTokenRepository: RefreshTokenRepository
 ): TokenCreator {
 
   override fun createToken(email: Email, password: Password): Pair<String, String> {

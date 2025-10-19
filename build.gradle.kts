@@ -26,8 +26,9 @@ dependencies {
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-  implementation("org.springframework.security:spring-security-core")
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-security")
+
   developmentOnly("org.springframework.boot:spring-boot-docker-compose")
   runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
   implementation("com.github.f4b6a3:ulid-creator:5.2.3")
