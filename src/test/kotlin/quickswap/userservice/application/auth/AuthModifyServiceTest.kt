@@ -4,14 +4,14 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import quickswap.commons.application.shared.ports.out.TokenResolver
+import quickswap.commons.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.vo.Email
+import quickswap.commons.domain.shared.vo.Password
 import quickswap.userservice.adapter.persistence.auth.RefreshTokenEntity
 import quickswap.userservice.application.auth.ports.out.RefreshTokenRepository
 import quickswap.userservice.application.auth.ports.out.TokenProvider
-import quickswap.userservice.application.auth.ports.out.TokenResolver
 import quickswap.userservice.application.user.ports.`in`.UserFinder
-import quickswap.userservice.domain.shared.PasswordEncoder
-import quickswap.userservice.domain.user.Email
-import quickswap.userservice.domain.user.Password
 import quickswap.userservice.fixture.UserFixture
 import java.time.LocalDateTime
 

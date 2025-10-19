@@ -1,8 +1,8 @@
 package quickswap.userservice.application.user.ports.`in`
 
-import quickswap.userservice.domain.user.Email
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Email
 import quickswap.userservice.domain.user.User
-import quickswap.userservice.domain.user.UserId
 
 interface UserFinder {
   fun findByEmail(email: Email): User

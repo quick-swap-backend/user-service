@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
-import quickswap.userservice.adapter.security.InvalidTokenException
-import quickswap.userservice.adapter.security.TokenExpiredException
+import quickswap.commons.adapter.shared.security.InvalidTokenException
+import quickswap.commons.adapter.shared.security.TokenExpiredException
 import quickswap.userservice.domain.user.DuplicateEmailException
 import java.time.LocalDateTime
 

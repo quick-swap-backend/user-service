@@ -1,8 +1,8 @@
 package quickswap.userservice.fixture
 
+import quickswap.commons.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.id.UserId
 import quickswap.userservice.adapter.persistence.auth.RefreshTokenEntity
-import quickswap.userservice.domain.shared.PasswordEncoder
-import quickswap.userservice.domain.user.UserId
 import java.time.LocalDateTime
 import java.util.UUID
 

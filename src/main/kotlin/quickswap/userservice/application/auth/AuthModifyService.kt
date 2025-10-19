@@ -2,15 +2,15 @@ package quickswap.userservice.application.auth
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import quickswap.commons.application.shared.ports.out.TokenResolver
+import quickswap.commons.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.vo.Email
+import quickswap.commons.domain.shared.vo.Password
 import quickswap.userservice.adapter.persistence.auth.RefreshTokenEntity
 import quickswap.userservice.application.auth.ports.`in`.TokenCreator
 import quickswap.userservice.application.auth.ports.out.RefreshTokenRepository
 import quickswap.userservice.application.auth.ports.out.TokenProvider
-import quickswap.userservice.application.auth.ports.out.TokenResolver
 import quickswap.userservice.application.user.ports.`in`.UserFinder
-import quickswap.userservice.domain.shared.PasswordEncoder
-import quickswap.userservice.domain.user.Email
-import quickswap.userservice.domain.user.Password
 import quickswap.userservice.domain.user.User
 
 @Transactional

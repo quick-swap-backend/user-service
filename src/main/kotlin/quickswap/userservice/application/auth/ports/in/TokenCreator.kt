@@ -1,7 +1,8 @@
 package quickswap.userservice.application.auth.ports.`in`
 
-import quickswap.userservice.domain.user.Email
-import quickswap.userservice.domain.user.Password
+import quickswap.commons.domain.shared.vo.Email
+import quickswap.commons.domain.shared.vo.Password
+
 
 interface TokenCreator {
   fun createToken(email: Email, password: Password): Pair<String, String>

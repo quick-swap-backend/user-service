@@ -1,7 +1,8 @@
 package quickswap.userservice.application.auth.ports.out
 
-import quickswap.userservice.domain.user.Email
-import quickswap.userservice.domain.user.UserId
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Email
+
 
 interface TokenProvider {
 
