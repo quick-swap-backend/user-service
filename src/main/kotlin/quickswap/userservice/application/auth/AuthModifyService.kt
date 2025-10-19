@@ -6,6 +6,7 @@ import quickswap.userservice.adapter.persistence.auth.RefreshTokenEntity
 import quickswap.userservice.application.auth.ports.`in`.TokenCreator
 import quickswap.userservice.application.auth.ports.out.RefreshTokenRepository
 import quickswap.userservice.application.auth.ports.out.TokenProvider
+import quickswap.userservice.application.auth.ports.out.TokenResolver
 import quickswap.userservice.application.user.ports.`in`.UserFinder
 import quickswap.userservice.domain.shared.PasswordEncoder
 import quickswap.userservice.domain.user.Email
@@ -18,6 +19,7 @@ class AuthModifyService(
   private val userFinder: UserFinder,
   private val passwordEncoder: PasswordEncoder,
   private val tokenProvider: TokenProvider,
+  private val tokenResolver: TokenResolver,
   private val refreshTokenRepository: RefreshTokenRepository
 ): TokenCreator {
 
@@ -42,7 +44,7 @@ class AuthModifyService(
     val accessToken = tokenProvider.generateAccessToken(user.id, user.email)
     val refreshToken = tokenProvider.generateRefreshToken(user.id)
 
-    val entity = RefreshTokenEntity.of(user.id, refreshToken, tokenProvider.getExpirationDateTime(refreshToken))
+    val entity = RefreshTokenEntity.of(user.id, refreshToken, tokenResolver.getExpirationDateTime(refreshToken))
     refreshTokenRepository.save(entity)
 
     return (accessToken to refreshToken)
@@ -51,7 +53,7 @@ class AuthModifyService(
   override fun accessTokenRefresh(refreshToken: String): String {
     val foundRefreshTokenToken = findAndVerifyRefreshTokenEntity(refreshToken)
 
-    val userId = tokenProvider.getUserIdFromToken(refreshToken)
+    val userId = tokenResolver.getUserIdFromToken(refreshToken)
     val foundUser = userFinder.findById(userId)
 
     return tokenProvider.generateAccessToken(foundUser.id, foundUser.email)
