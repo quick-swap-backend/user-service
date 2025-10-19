@@ -1,10 +1,15 @@
 package quickswap.userservice.domain.user
 
+import jakarta.persistence.Column
+import jakarta.persistence.Convert
 import jakarta.persistence.Embedded
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
+import quickswap.commons.adapter.shared.persistence.converter.EmailConverter
+import quickswap.commons.adapter.shared.persistence.converter.MoneyConverter
+import quickswap.commons.adapter.shared.persistence.converter.TelephoneConverter
 import quickswap.commons.domain.shared.PasswordEncoder
 import quickswap.commons.domain.shared.id.UserId
 import quickswap.commons.domain.shared.vo.Address
@@ -24,7 +29,8 @@ class User private constructor(
   @EmbeddedId
   val id: UserId,
 
-  @Embedded
+  @Column(name = "email", nullable = false)
+  @Convert(converter = EmailConverter::class)
   var email: Email,
 
   var hashedPassword: String,
@@ -32,7 +38,8 @@ class User private constructor(
   @Embedded
   var address: Address,
 
-  @Embedded
+  @Column(name = "telephone", nullable = false)
+  @Convert(converter = TelephoneConverter::class)
   var telephone: Telephone,
 
   /* 평판 평균 점수. 1~5 */

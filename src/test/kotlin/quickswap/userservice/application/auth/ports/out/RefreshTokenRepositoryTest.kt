@@ -1,5 +1,6 @@
 package quickswap.userservice.application.auth.ports.out
 
+import jakarta.transaction.Transactional
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNotNull
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,6 +12,7 @@ import java.util.UUID
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
+@Transactional
 @DataJpaTest
 class RefreshTokenRepositoryTest {
 
