@@ -2,14 +2,14 @@ package quickswap.userservice.application.user
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import quickswap.commons.domain.shared.IdProvider
+import quickswap.commons.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.id.UserId
 import quickswap.userservice.application.user.ports.`in`.UserCreator
 import quickswap.userservice.application.user.ports.out.UserRepository
-import quickswap.userservice.domain.shared.IdProvider
-import quickswap.userservice.domain.shared.PasswordEncoder
 import quickswap.userservice.domain.user.DuplicateEmailException
 import quickswap.userservice.domain.user.User
 import quickswap.userservice.domain.user.UserCreateRequest
-import quickswap.userservice.domain.user.UserId
 
 @Transactional
 @Service

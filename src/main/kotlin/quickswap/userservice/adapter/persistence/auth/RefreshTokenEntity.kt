@@ -5,7 +5,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import quickswap.userservice.domain.user.UserId
+import quickswap.commons.domain.shared.id.UserId
 import java.time.LocalDateTime
 
 @Entity

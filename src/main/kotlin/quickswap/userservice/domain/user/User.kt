@@ -5,7 +5,12 @@ import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
-import quickswap.userservice.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Address
+import quickswap.commons.domain.shared.vo.Email
+import quickswap.commons.domain.shared.vo.Password
+import quickswap.commons.domain.shared.vo.Telephone
 
 @Entity
 @Table(
@@ -36,7 +41,7 @@ class User private constructor(
 
 ) {
 
-  fun verifyPassword(password:Password, passwordEncoder: PasswordEncoder): Boolean {
+  fun verifyPassword(password: Password, passwordEncoder: PasswordEncoder): Boolean {
     return passwordEncoder.matches(password.value, hashedPassword)
   }
 

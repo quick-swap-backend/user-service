@@ -1,7 +1,12 @@
 package quickswap.userservice.fixture
 
-import quickswap.userservice.domain.shared.IdProvider
-import quickswap.userservice.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.IdProvider
+import quickswap.commons.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Address
+import quickswap.commons.domain.shared.vo.Email
+import quickswap.commons.domain.shared.vo.Password
+import quickswap.commons.domain.shared.vo.Telephone
 import quickswap.userservice.domain.user.*
 import java.util.UUID
 

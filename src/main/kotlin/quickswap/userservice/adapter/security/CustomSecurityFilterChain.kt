@@ -7,12 +7,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import quickswap.commons.adapter.shared.security.JwtAuthenticationFilter
 
 @EnableWebSecurity
 @Configuration
-class SecurityConfig(
+class CustomSecurityFilterChain(
   private val jwtAuthenticationFilter: JwtAuthenticationFilter,
-  private val userDetailsService: CustomUserDetailsService
 ) {
   @Bean
   fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {

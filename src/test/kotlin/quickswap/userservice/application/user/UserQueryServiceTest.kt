@@ -4,10 +4,10 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Email
 import quickswap.userservice.application.user.ports.out.UserRepository
-import quickswap.userservice.domain.user.Email
 import quickswap.userservice.domain.user.User
-import quickswap.userservice.domain.user.UserId
 import quickswap.userservice.fixture.UserFixture
 import java.util.*
 

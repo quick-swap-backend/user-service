@@ -6,9 +6,9 @@ import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.BeforeEach
+import quickswap.commons.domain.shared.IdProvider
+import quickswap.commons.domain.shared.PasswordEncoder
 import quickswap.userservice.application.user.ports.out.UserRepository
-import quickswap.userservice.domain.shared.IdProvider
-import quickswap.userservice.domain.shared.PasswordEncoder
 import quickswap.userservice.domain.user.DuplicateEmailException
 import quickswap.userservice.fixture.SecurityFixture
 import quickswap.userservice.fixture.UserFixture

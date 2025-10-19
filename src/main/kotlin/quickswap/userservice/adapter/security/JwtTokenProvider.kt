@@ -4,9 +4,9 @@ import io.jsonwebtoken.*
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Email
 import quickswap.userservice.application.auth.ports.out.TokenProvider
-import quickswap.userservice.domain.user.Email
-import quickswap.userservice.domain.user.UserId
 import java.util.*
 import javax.crypto.SecretKey
 

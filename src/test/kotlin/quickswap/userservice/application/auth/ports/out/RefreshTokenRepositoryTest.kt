@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNotNull
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import quickswap.commons.domain.shared.id.UserId
 import quickswap.userservice.adapter.persistence.auth.RefreshTokenEntity
-import quickswap.userservice.domain.user.UserId
 import java.time.LocalDateTime
 import java.util.UUID
 import kotlin.test.assertFalse

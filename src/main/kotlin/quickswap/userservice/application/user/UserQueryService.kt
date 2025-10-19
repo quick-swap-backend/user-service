@@ -1,11 +1,11 @@
 package quickswap.userservice.application.user
 
 import org.springframework.stereotype.Service
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Email
 import quickswap.userservice.application.user.ports.`in`.UserFinder
 import quickswap.userservice.application.user.ports.out.UserRepository
-import quickswap.userservice.domain.user.Email
 import quickswap.userservice.domain.user.User
-import quickswap.userservice.domain.user.UserId
 
 @Service
 class UserQueryService(

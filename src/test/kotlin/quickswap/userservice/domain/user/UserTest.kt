@@ -1,8 +1,13 @@
 package quickswap.userservice.domain.user
 
 import org.junit.jupiter.api.Test
-import quickswap.userservice.domain.shared.IdProvider
-import quickswap.userservice.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.IdProvider
+import quickswap.commons.domain.shared.PasswordEncoder
+import quickswap.commons.domain.shared.id.UserId
+import quickswap.commons.domain.shared.vo.Address
+import quickswap.commons.domain.shared.vo.Email
+import quickswap.commons.domain.shared.vo.Password
+import quickswap.commons.domain.shared.vo.Telephone
 import quickswap.userservice.fixture.UserFixture
 import quickswap.userservice.fixture.UserFixture.Companion.createUser
 import quickswap.userservice.fixture.UserFixture.Companion.getUserCreateRequest
