@@ -12,7 +12,7 @@ import quickswap.userservice.domain.user.UserCreateRequest
 @RequestMapping("/api/v1")
 @RestController
 class UserController(
-  val userCreator: UserCreator
+  private val userCreator: UserCreator
 ) {
 
   @PostMapping("/user")

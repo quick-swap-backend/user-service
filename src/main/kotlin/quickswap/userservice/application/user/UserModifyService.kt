@@ -15,11 +15,11 @@ import quickswap.userservice.domain.user.UserId
 @Service
 class UserModifyService(
 
-  val userRepository: UserRepository,
+  private val userRepository: UserRepository,
 
-  val idProvider: IdProvider,
+  private val idProvider: IdProvider,
 
-  val passwordEncoder: PasswordEncoder,
+  private val passwordEncoder: PasswordEncoder,
 
 ): UserCreator {
   override fun create(request: UserCreateRequest): User {
