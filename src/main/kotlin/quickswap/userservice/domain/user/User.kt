@@ -3,9 +3,17 @@ package quickswap.userservice.domain.user
 import jakarta.persistence.Embedded
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 import quickswap.userservice.domain.shared.PasswordEncoder
 
 @Entity
+@Table(
+  name = "users",
+  uniqueConstraints = [
+    UniqueConstraint(name = "uk_user_email", columnNames = ["email"])
+  ]
+)
 class User private constructor(
 
   @EmbeddedId
@@ -53,24 +61,22 @@ class User private constructor(
 
     fun of(
       id: UserId,
-      email: Email,
-      password: Password,
+      userCreateRequest: UserCreateRequest,
       passwordEncoder: PasswordEncoder,
-      address: Address,
-      telephone: Telephone,
       reputation: Reputation = Reputation(null)
     ): User {
-      val hashedPassword = passwordEncoder.encode(password.value)
+      val hashedPassword = passwordEncoder.encode(userCreateRequest.password.value)
+
       require(hashedPassword.isNotBlank()) {
         "비밀번호 해싱 실패"
       }
 
       return User(
         id = id,
-        email = email,
+        email = userCreateRequest.email,
         hashedPassword = hashedPassword,
-        address = address,
-        telephone = telephone,
+        address = userCreateRequest.address,
+        telephone = userCreateRequest.telephone,
         reputation = reputation
       )
     }

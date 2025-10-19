@@ -9,13 +9,7 @@ class EmailTest {
 
   @Test
   fun validate() {
-    assertThrows<IllegalArgumentException> {
-      Email("a")
-      Email("a@")
-      Email("a@b")
-      Email("a@b")
-      Email("a@b.c")
-    }
+    assertThrows<IllegalArgumentException> { Email("a@b.c") }
 
     Email("a@b.co")
   }

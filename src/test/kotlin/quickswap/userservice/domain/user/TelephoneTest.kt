@@ -8,11 +8,11 @@ import kotlin.test.assertNotEquals
 class TelephoneTest {
   @Test
   fun validate() {
-    assertThrows<IllegalArgumentException> {
-      Telephone("010-12345-1234")
-      Telephone("010-1234-123")
-      Telephone("020-1234-1234")
-    }
+    assertThrows<IllegalArgumentException> { Telephone("010-12345-1234") }
+
+    assertThrows<IllegalArgumentException> { Telephone("010-1234-123") }
+
+    assertThrows<IllegalArgumentException> { Telephone("020-1234-1234") }
 
     Telephone("010-1234-5678")
     Telephone("010-123-4567")
