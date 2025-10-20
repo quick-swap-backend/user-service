@@ -1,10 +1,11 @@
+server.port: 8000
 spring:
   application:
     name: userservice
   docker.compose.lifecycle-management: start_only
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/userservice
+    url: jdbc:mariadb://localhost:8001/userservice
     username: haisia
     password: test@1234
   jpa:
